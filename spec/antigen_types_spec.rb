@@ -34,6 +34,7 @@ RSpec.describe 'The antigen types folder' do
           expect(data[field]).to be_a(Integer)
           expect(data[field]).to be >= 0
         end
+        
         expect(data['updated_at']).to be >= data['created_at']
       end
 
