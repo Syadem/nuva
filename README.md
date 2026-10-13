@@ -33,3 +33,33 @@ Currently the specs cover antigen types, valences, diseases, vaccines and their 
   their other translations accept `name:` (null). Antigen type translations
   also accept `name:` (null).
 - Supported language directories and no orphan translation files.
+
+## Changelog on GitHub Pages
+
+Pushing any new tag triggers `.github/workflows/build.yml`. The workflow retrieves
+all Git history and tags, generates the changelog, and publishes `build/` to the
+`gh-pages` branch using the same deployment action as the reference repository.
+Keep GitHub Pages configured to publish from the root of `gh-pages`.
+
+The site root and `changelog.html` show the changelog; `changelog.md` is also
+available. Each version lists its date, author, commits since the preceding tag
+and files added, modified or deleted. The first tag includes all preceding
+commits and all files present at that tag. Only tags reachable from the release
+being built are included. Files are marked with Git's A/M/D/R status codes.
+
+Generate locally with all reachable tags:
+
+```sh
+bundle install
+bundle exec ruby scripts/build_changelog.rb
+```
+
+Or generate for a particular release:
+
+```sh
+bundle exec ruby scripts/build_changelog.rb v1.0.0
+```
+
+The generated `build/` directory is ignored by Git. Push the workflow and script
+on `main` before creating and pushing the next release tag. The existing RSpec
+workflow continues to validate data independently on every push.
