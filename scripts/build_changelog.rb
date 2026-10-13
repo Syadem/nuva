@@ -69,6 +69,7 @@ html = <<~HTML
         body { margin: 0; color: #172033; background: #f5f7fa; font: 16px/1.6 system-ui, sans-serif; }
         main { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
         h2 { border-top: 1px solid #ccd3dd; padding-top: 24px; margin-top: 32px; }
+        h3 { font-size: 1em; }
         a { color: #2459a6; }
         li { overflow-wrap: anywhere; }
         code { font-size: .9em; }
