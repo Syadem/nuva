@@ -1,5 +1,20 @@
 # Nuva changelog
 
+## Version v0.0.2
+
+**Date:** 2026-10-13
+
+**Author:** Lucas Sotty
+
+### Changes
+
+- 6e32326 - Changelog css (Lucas Sotty)
+
+### Files
+
+- **M**: `README.md`
+- **M**: `scripts/build_changelog.rb`
+
 ## Version v0.0.1
 
 **Date:** 2026-10-13
