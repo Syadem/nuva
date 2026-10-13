@@ -55,6 +55,9 @@ end
 
 renderer = Redcarpet::Render::HTML.new(filter_html: true)
 body = Redcarpet::Markdown.new(renderer, autolink: true).render(markdown)
+body = body.gsub(/<h3>Files<\/h3>\s*(<ul>.*?<\/ul>)/m) do
+  "<details>\n<summary>Files</summary>\n#{Regexp.last_match(1)}\n</details>"
+end
 html = <<~HTML
   <!doctype html>
   <html lang="en">
@@ -69,10 +72,11 @@ html = <<~HTML
         a { color: #2459a6; }
         li { overflow-wrap: anywhere; }
         code { font-size: .9em; }
+        details { margin: 24px 0; }
+        summary { cursor: pointer; font-weight: 600; }
       </style>
     </head>
     <body><main>
-      <p><a href="changelog.md">Download Markdown</a></p>
       #{body}
     </main></body>
   </html>

@@ -41,8 +41,8 @@ all Git history and tags, generates the changelog, and publishes `build/` to the
 `gh-pages` branch using the same deployment action as the reference repository.
 Keep GitHub Pages configured to publish from the root of `gh-pages`.
 
-The site root and `changelog.html` show the changelog; `changelog.md` is also
-available. Each version lists its date, author, commits since the preceding tag
+The site root and `changelog.html` show the changelog, with expandable file lists
+collapsed by default. `changelog.md` is also generated. Each version lists its date, author, commits since the preceding tag
 and files added, modified or deleted. The first tag includes all preceding
 commits and all files present at that tag. Only tags reachable from the release
 being built are included. Files are marked with Git's A/M/D/R status codes.
