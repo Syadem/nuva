@@ -1,13 +1,13 @@
 ---
 id: 1275
-name:
+name: D BIOMED
 description: Diphtheria toxoid (standard dose) pediatric vaccine
 generic: false
 immunoglobulin: false
 injection_methods:
 - subcutaneous
 created_at: 1739963702
-updated_at: 1743583489
+updated_at: 1791880614
 valence_ids:
 - 97
 other_names: []
