@@ -80,7 +80,7 @@ RSpec.describe 'The valences folder' do
       end
 
       TRANSLATION_LANGUAGES.each do |language|
-        it "has a valid #{language} translation, including when the name is null" do
+        it "has a valid #{language} translation" do
           translation_file = NUVA_ROOT.join('translations', language, 'valences', File.basename(file))
 
           expect(translation_file).to be_file
@@ -89,7 +89,13 @@ RSpec.describe 'The valences folder' do
 
           expect(translation).to be_a(Hash)
           expect(translation.keys).to contain_exactly('name')
-          expect(translation['name']).to(be_a(String).or be_nil)
+          
+          if language == 'fr'
+            expect(translation['name']).to be_a(String)
+            expect(translation['name'].strip).not_to be_empty
+          else
+            expect(translation['name']).to(be_a(String).or be_nil)
+          end
         end
       end
     end
