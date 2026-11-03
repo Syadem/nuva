@@ -1,66 +1,44 @@
-# Nuva data
+# NUVA
 
-YAML data for antigen types, diseases, valences and vaccines. English names live
-in the base files. Additional languages (`fr`, `de`, `lv`, `gr`, `pl`) live in
-`translations/<language>/<concept>/`.
+### A shared vocabulary for understanding vaccines.
 
-## Validate the YAML
+Vaccination records use different product names, languages, and coding systems. **NUVA** is a collaborative project that brings vaccines, valences, diseases, and antigen types together in a structured nomenclature—giving contributors and developers a common language to describe vaccines and connect vaccination data across systems.
 
-```sh
-bundle install
-bundle exec rspec
-```
+[**Open the admin interface →**](https://admin.nuva.syadem.com/) · [**Explore the full changelog →**](https://syadem.github.io/nuva/)
 
-Currently the specs cover antigen types, valences, diseases, vaccines and their translations, following
-`../vaccination_relevant_characteristics`. They check:
+---
 
-- Valid YAML, exact schemas and integer IDs matching `AGT-<id>.yml` and
-  `VAL-<id>.yml`, `DIS-<id>.yml` and `VAC-<id>.yml` filenames.
-- Nonempty English names and nonnegative integer Unix timestamps, with
-  `updated_at >= created_at`.
-- Unique IDs, existing parents and no cycles in the hierarchy.
-- For valences: nonempty abbreviations, optional antigen type references to
-  existing entries, and exactly one unique SYADEM UUID code.
-- For diseases: unique integer valence references to existing entries and
-  exactly one unique SYADEM UUID code.
-- For vaccines: boolean `generic` and `immunoglobulin`, nullable string fields
-  `description` and `notes`,
-  string-array `other_names`, integer references to existing valences, one unique
-  SYADEM UUID code, and `injection_methods` restricted to `intramuscular`,
-  `subcutaneous`, `intradermal`, `intranasal` and `oral`.
-- One translation per entry in each supported language, with only `name` (and
-  nullable `description` for vaccines). Diseases require nonempty names in every
-  language. Vaccines and valences require nonempty names in English and French;
-  their other translations accept `name:` (null). Antigen type translations
-  also accept `name:` (null).
-- Supported language directories and no orphan translation files.
+## Shared knowledge, ready to connect
 
-## Changelog on GitHub Pages
+NUVA brings together a collaboratively maintained vocabulary, multilingual content, and structured data designed for integration into software.
 
-Pushing any new tag triggers `.github/workflows/build.yml`. The workflow retrieves
-all Git history and tags, generates the changelog, and publishes `build/` to the
-`gh-pages` branch using the same deployment action as the reference repository.
-Keep GitHub Pages configured to publish from the root of `gh-pages`.
+The nomenclature is maintained in **YAML**, a popular, easy-to-read format that makes the data straightforward to review and edit.
 
-The site root and `changelog.html` show the changelog, with expandable file lists
-collapsed by default. `changelog.md` is also generated. Each version lists its date, author, commits since the preceding tag
-and files added, modified or deleted. The first tag includes all preceding
-commits and all files present at that tag. Only tags reachable from the release
-being built are included. Files are marked with Git's A/M/D/R status codes.
+| | What NUVA offers |
+| --- | --- |
+| 🤝 **Collaborative by design** | A shared repository for maintaining and improving vaccine knowledge. |
+| 🔗 **Connected to external nomenclatures** | Code mappings connect vaccine entries to other nomenclatures, supporting interoperability across systems. |
+| ✨ **Approachable administration** | A user-friendly interface connected directly to this GitHub repository. |
+| 🌍 **Six languages, with room to grow** | English, French, German, Greek, Latvian, and Polish, with the possibility of adding more. |
+| 📖 **A traceable history** | A complete changelog makes it easy to follow the evolution of the nomenclature. |
+| 🛠️ **Built for integration** | Structured data connects vaccines, their valences, target diseases, and antigen types for use in applications. |
 
-Generate locally with all reachable tags:
+## Contribute through a friendly interface
 
-```sh
-bundle install
-bundle exec ruby scripts/build_changelog.rb
-```
+The [NUVA administration interface](https://admin.nuva.syadem.com/) provides an accessible way to work with the nomenclature, backed by this GitHub repository. It brings a friendly editing experience to a collaborative, version-controlled project.
 
-Or generate for a particular release:
+Want to improve a vaccine entry, suggest a code mapping, or help extend language coverage? Contribute through the admin interface.
 
-```sh
-bundle exec ruby scripts/build_changelog.rb v1.0.0
-```
+## One vocabulary, multiple languages
 
-The generated `build/` directory is ignored by Git. Push the workflow and script
-on `main` before creating and pushing the next release tag. The existing RSpec
-workflow continues to validate data independently on every push.
+NUVA supports **English, French, German, Greek, Latvian, and Polish**. Contributors can help complete and improve translations through the admin interface. Additional languages can be added as the project and its community grow, helping the same shared vocabulary serve more people and applications.
+
+## From shared data to your application
+
+NUVA connects vaccine products to their valences, and those valences to target diseases and antigen types. This shared structure lets applications work with individual vaccine entries and the concepts behind them.
+
+Code mappings to external nomenclatures help connect NUVA entries with the terminology already used in other systems.
+
+## Follow every change
+
+The nomenclature evolves as contributions are made. Browse the [complete changelog](https://syadem.github.io/nuva/) to explore its history and keep track of updates.
