@@ -35,9 +35,54 @@ NUVA supports **English, French, German, Greek, Latvian, and Polish**. Contribut
 
 ## From shared data to your application
 
-NUVA connects vaccine products to their valences, and those valences to target diseases and antigen types. This shared structure lets applications work with individual vaccine entries and the concepts behind them.
+NUVA connects vaccine products to generic vaccines. Generic vaccines reference valences, which connect to target diseases and antigen types. This shared structure lets applications work with individual vaccine entries and the concepts behind them.
 
 Code mappings to external nomenclatures help connect NUVA entries with the terminology already used in other systems.
+
+### Vaccine data structure
+
+Each vaccine is stored in `vaccines/VAC-<id>.yml`, with a positive integer `id`.
+The `generic` boolean determines which fields are required:
+
+| Field | Generic vaccine (`generic: true`) | Non-generic vaccine (`generic: false`) |
+| --- | --- | --- |
+| `valence_ids` | Required array of unique positive integer valence IDs | Must be absent |
+| `generic_vaccine_id` | Must be absent | Required positive integer vaccine ID |
+| `immunoglobulin` | Required boolean | Must be absent; resolved through the generic vaccine |
+
+Every `valence_ids` entry references an existing `valences/VAL-<id>.yml` file.
+The `generic_vaccine_id` references an existing `vaccines/VAC-<id>.yml` file
+whose `generic` value is `true`. A vaccine cannot reference itself.
+Forbidden fields must be omitted entirely, including when their value would be null
+or an empty array.
+
+For example, the relationship fields for a generic vaccine are:
+
+```yaml
+id: 345
+generic: true
+immunoglobulin: false
+valence_ids:
+- 156
+```
+
+A non-generic vaccine referring to it has these relationship fields:
+
+```yaml
+id: 1
+generic: false
+generic_vaccine_id: 345
+```
+
+Applications resolve a non-generic vaccine's valences and `immunoglobulin` value
+through its generic vaccine.
+During import from Apollon, a generic vaccine's `immunoglobulin` is set to `true`
+if it or any of its associated non-generic vaccines has a source value of `true`;
+it is `false` only when all these source values are `false`.
+Disease-to-valence relationships continue to use `valence_ids` directly.
+The other vaccine fields and translation files follow the same rules for both
+vaccine types. The complete data contract is checked by `spec/vaccines_spec.rb`
+with `bundle exec rspec`.
 
 ## Follow every change
 
