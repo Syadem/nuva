@@ -39,6 +39,15 @@ NUVA connects vaccine products to generic vaccines. Generic vaccines reference v
 
 Code mappings to external nomenclatures help connect NUVA entries with the terminology already used in other systems.
 
+### Code mappings
+
+Each nomenclature has a CSV under `codes/<concept>/<nomenclature>.csv`.
+The concept folders are `antigen_types`, `vaccines`, `diseases` and `valences`.
+For example, `codes/diseases/syadem.csv` maps disease IDs to Apollon UUIDs.
+Every CSV has the header `nuva_id,code`. The `nuva_id` column refers to the
+integer `id` in the corresponding concept YAML. Read `code` as text to
+preserve leading zeros.
+
 ### Vaccine data structure
 
 Each vaccine is stored in `vaccines/VAC-<id>.yml`, with a positive integer `id`.
