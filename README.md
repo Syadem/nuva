@@ -93,6 +93,15 @@ The other vaccine fields and translation files follow the same rules for both
 vaccine types. The complete data contract is checked by `spec/vaccines_spec.rb`
 with `bundle exec rspec`.
 
+### Valence types
+
+Valence types describe the mechanism used to generate the immune response, following
+the [NUVA valence types tree](https://nuva.ivci.org/documentation/core/valence_types.html).
+Each valence type is stored in `valence_types/VTY-<id>.yml` with an `id`, an optional
+`parent_id` referencing another valence type, and an English `name`. The two roots are
+`Antigens` and `Antibodies`. Translations live in `translations/<language>/valence_types/`.
+Valence types will replace antigen types, which are kept for now during the transition.
+
 ## Follow every change
 
 The nomenclature evolves as contributions are made. Browse the [complete changelog](https://syadem.github.io/nuva/) to explore its history and keep track of updates.
