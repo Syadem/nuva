@@ -2,7 +2,7 @@
 
 ### A shared vocabulary for understanding vaccines.
 
-Vaccination records use different product names, languages, and coding systems. **NUVA** is a collaborative project that brings vaccines, valences, diseases, and antigen types together in a structured nomenclature—giving contributors and developers a common language to describe vaccines and connect vaccination data across systems.
+Vaccination records use different product names, languages, and coding systems. **NUVA** is a collaborative project that brings vaccines, valences, valence types, and diseases together in a structured nomenclature—giving contributors and developers a common language to describe vaccines and connect vaccination data across systems.
 
 [**Open the admin interface →**](https://admin.nuva.syadem.com/) · [**Explore the full changelog →**](https://syadem.github.io/nuva/)
 
@@ -21,7 +21,7 @@ The nomenclature is maintained in **YAML**, a popular, easy-to-read format that 
 | ✨ **Approachable administration** | A user-friendly interface connected directly to this GitHub repository. |
 | 🌍 **Six languages, with room to grow** | English, French, German, Greek, Latvian, and Polish, with the possibility of adding more. |
 | 📖 **A traceable history** | A complete changelog makes it easy to follow the evolution of the nomenclature. |
-| 🛠️ **Built for integration** | Structured data connects vaccines, their valences, target diseases, and antigen types for use in applications. |
+| 🛠️ **Built for integration** | Structured data connects vaccines, their valences, valence types, and target diseases for use in applications. |
 
 ## Contribute through a friendly interface
 
@@ -35,14 +35,14 @@ NUVA supports **English, French, German, Greek, Latvian, and Polish**. Contribut
 
 ## From shared data to your application
 
-NUVA connects vaccine products to generic vaccines. Generic vaccines reference valences, which connect to target diseases and antigen types. This shared structure lets applications work with individual vaccine entries and the concepts behind them.
+NUVA connects vaccine products to generic vaccines. Generic vaccines reference valences, which connect to target diseases and valence types. This shared structure lets applications work with individual vaccine entries and the concepts behind them.
 
 Code mappings to external nomenclatures help connect NUVA entries with the terminology already used in other systems.
 
 ### Code mappings
 
 Each nomenclature has a CSV under `codes/<concept>/<nomenclature>.csv`.
-The concept folders are `antigen_types`, `vaccines`, `diseases` and `valences`.
+The concept folders are `vaccines`, `diseases` and `valences`.
 For example, `codes/diseases/syadem.csv` maps disease IDs to Apollon UUIDs.
 Every CSV has the header `nuva_id,code`. The `nuva_id` column refers to the
 integer `id` in the corresponding concept YAML. Read `code` as text to
@@ -92,6 +92,16 @@ Disease-to-valence relationships continue to use `valence_ids` directly.
 The other vaccine fields and translation files follow the same rules for both
 vaccine types. The complete data contract is checked by `spec/vaccines_spec.rb`
 with `bundle exec rspec`.
+
+### Valence types
+
+Valence types describe the mechanism used to generate the immune response, following
+the [NUVA valence types tree](https://nuva.ivci.org/documentation/core/valence_types.html).
+Each valence type is stored in `valence_types/VTY-<id>.yml` with an `id`, an optional
+`parent_id` referencing another valence type, and an English `name`. The two roots are
+`Antigens` and `Antibodies`. Translations live in `translations/<language>/valence_types/`.
+Each valence references its valence type through the required `valence_type_id`.
+A child valence must have the same valence type as its parent, or one of its subtypes.
 
 ## Follow every change
 
