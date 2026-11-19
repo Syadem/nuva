@@ -100,8 +100,10 @@ the [NUVA valence types tree](https://nuva.ivci.org/documentation/core/valence_t
 Each valence type is stored in `valence_types/VTY-<id>.yml` with an `id`, an optional
 `parent_id` referencing another valence type, and an English `name`. The two roots are
 `Antigens` and `Antibodies`. Translations live in `translations/<language>/valence_types/`.
-Each valence references its valence type through the required `valence_type_id`.
-A child valence must have the same valence type as its parent, or one of its subtypes.
+Each valence references its valence type through `valence_type_id`. It is required for
+child valences and optional for root valences, which leave it empty when their children
+mix antigens and antibodies. A child valence must have the same valence type as its
+parent, or one of its subtypes.
 
 ## Follow every change
 
