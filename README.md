@@ -44,9 +44,11 @@ Code mappings to external nomenclatures help connect NUVA entries with the termi
 Each nomenclature has a CSV under `codes/<concept>/<nomenclature>.csv`.
 The concept folders are `vaccines`, `diseases` and `valences`.
 For example, `codes/diseases/syadem.csv` maps disease IDs to Apollon UUIDs.
-Every CSV has the header `nuva_id,code`. The `nuva_id` column refers to the
-integer `id` in the corresponding concept YAML. Read `code` as text to
-preserve leading zeros.
+Every CSV has the header `nuva_id,code,code_label`. The `nuva_id` column refers
+to the integer `id` in the corresponding concept YAML. Read `code` as text to
+preserve leading zeros. The optional `code_label` column holds the label of the
+code in its nomenclature; it is the same on every row of a given code. Fields
+follow standard CSV quoting, so labels may contain commas and quotes.
 
 ### Vaccine data structure
 
