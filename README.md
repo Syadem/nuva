@@ -50,6 +50,19 @@ preserve leading zeros. The optional `code_label` column holds the label of the
 code in its nomenclature; it is the same on every row of a given code. Fields
 follow standard CSV quoting, so labels may contain commas and quotes.
 
+### Translations
+
+English values live in the concept YAML files. The other languages have one CSV
+per concept under `translations/<language>/<concept>.csv`, for example
+`translations/fr/vaccines.csv`. The concepts are `vaccines`, `diseases`,
+`valences` and `valence_types`.
+Every CSV starts with `nuva_id` followed by the translated fields: `name` for
+all concepts, plus `description` for vaccines. Each entry of the concept has
+exactly one row, sorted by `nuva_id`. An empty field is a missing translation. Fields follow
+standard CSV quoting and may contain line breaks, but no carriage return nor
+leading or trailing whitespace. The data contract is checked by
+`spec/translations_spec.rb`.
+
 ### Vaccine data structure
 
 Each vaccine is stored in `vaccines/VAC-<id>.yml`, with a positive integer `id`.
@@ -91,7 +104,7 @@ During import from Apollon, a generic vaccine's `immunoglobulin` is set to `true
 if it or any of its associated non-generic vaccines has a source value of `true`;
 it is `false` only when all these source values are `false`.
 Disease-to-valence relationships continue to use `valence_ids` directly.
-The other vaccine fields and translation files follow the same rules for both
+The other vaccine fields and translations follow the same rules for both
 vaccine types. The complete data contract is checked by `spec/vaccines_spec.rb`
 with `bundle exec rspec`.
 
@@ -101,7 +114,7 @@ Valence types describe the mechanism used to generate the immune response, follo
 the [NUVA valence types tree](https://nuva.ivci.org/documentation/core/valence_types.html).
 Each valence type is stored in `valence_types/VTY-<id>.yml` with an `id`, an optional
 `parent_id` referencing another valence type, and an English `name`. The two roots are
-`Antigens` and `Antibodies`. Translations live in `translations/<language>/valence_types/`.
+`Antigens` and `Antibodies`. Translations live in `translations/<language>/valence_types.csv`.
 Each valence references its valence type through `valence_type_id`. It is required for
 child valences and optional for root valences, which leave it empty when their children
 mix antigens and antibodies. A child valence must have the same valence type as its
